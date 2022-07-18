@@ -1,10 +1,16 @@
 #!/usr/bin/python3
-def safe_print_integer_err(value):
-    """prints an integer."""
-    import sys
-    try:
-        print("{:d}".format(value))
-        return True
-    except Exception as e:
-        print("Exception: {}".format(e), file=sys.stderr)
-        return False
+def safe_print_list_integers(my_list=[], x=0):
+    count = 0
+
+    for i in range(x):
+        try:
+            print("{:d}".format(my_list[i]), end='')
+        except TypeError:
+            pass
+        except ValueError:
+            pass
+        else:
+            count += 1
+
+    print()
+    return (count)
