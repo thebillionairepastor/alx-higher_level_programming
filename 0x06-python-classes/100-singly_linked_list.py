@@ -1,78 +1,72 @@
 #!/usr/bin/python3
-"""Define classes for a singly-linked list."""
+"""Singley Linked List"""""
 
 
 class Node:
-    """Represent a node in a singly-linked list."""
+    """Node class"""
 
     def __init__(self, data, next_node=None):
-        """Initialize a new Node.
-        Args:
-            data (int): The data of the new Node.
-            next_node (Node): The next node of the new Node.
-            """
+        """Defines a node of LL"""
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
-        """Get/set the data of the Node."""
-        return (self.__data)
+        """data Getter"""
+        return self.__data
 
     @data.setter
     def data(self, value):
+        """data Setter"""
         if not isinstance(value, int):
-            raise TypeError("data must be an integer")
+            raise TypeError('data must be an integer')
         self.__data = value
 
-        @property
-        def next_node(self):
-            """Get/set the next_node of the Node."""
-            return (self.__next_node)
+    @property
+    def next_node(self):
+        """next_node Getter"""
+        return self.__next_node
 
-        @next_node.setter
-        def next_node(self, value):
-            if not isinstance(value, Node) and value is not None:
-                raise TypeError("next_node must be a Node object")
-            self.__next_node = value
+    @next_node.setter
+    def next_node(self, value):
+        """next_node Setter"""
+        if value is not None and type(value) != Node:
+            raise TypeError('next_node must be a Node object')
+        self.__next_node = value
 
-    class SinglyLinkedList:
-        """Represent a singly-linked list."""
 
-        def __init__(self):
-            """Initializes a new SinglyLinkedList."""
-            self.__head = None
+class SinglyLinkedList:
+    """Singley Linked List class"""
 
-        def sorted_insert(self, value):
-            """Insert a new Node to the SinglyLinkedList.
-            The node is inserted into the list at the correctordered
-            numerical position.
+    def __init__(self):
+        """Initialize SSL class"""
+        self.head = None
 
-            Args:
-                value (Node): The new Node to insert.
+    def __str__(self):
+        """To string method"""
+        result = ""
+        node = self.head
+        while node:
+            result += str(node.data) + '\n'
+            node = node.next_node
+        return result[:-1]
 
-            """
-            new = Node(value)
-            if self.__head is None:
-                new.next_node = None
-                self.__head = new
-            elif self.__head.data > value:
-                new.next_node = self.__head
-            self.__head = new
+    def sorted_insert(self, value):
+        """Inserts a new node at sorted position"""
+        new_node = Node(value)
 
-            # else:
-            tmp = self.__head
-            while (tmp.next_node is not None and
-                    tmp.next_node.data < value):
-                tmp = tmp.next_node
-            new.next_node = tmp.next_node
-            tmp.next_node = new
+        if not self.head:
+            self.head = new_node
+            return
 
-        def __str__(self):
-            """Define the print() representation of a SinglyLinkedList."""
-            values = []
-            tmp = self.__head
-            while tmp is not None:
-                values.append(str(tmp.data))
-                tmp = tmp.next_node
-            return ('\n'.join(values))
+        if value < self.head.data:
+            new_node.next_node = self.head
+            self.head = new_node
+            return
+
+        node = self.head
+        while node.next_node and node.next_node.data < value:
+            node = node.next_node
+        if node.next_node:
+            new_node.next_node = node.next_node
+        node.next_node = new_node
