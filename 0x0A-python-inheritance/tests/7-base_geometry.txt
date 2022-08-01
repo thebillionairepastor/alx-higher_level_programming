@@ -1,0 +1,116 @@
+The ``7-base_geometry`` module
+==============================
+
+Using ``BaseGeometry``
+----------------------
+
+First import ``BaseGeometry`` from the ``7-base_geometry`` module:
+
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Check for module docstrings
+---------------------------
+>>> print(__import__("7-base_geometry").__doc__) #doctest: +NORMALIZE_WHITESPACE
+<BLANKLINE>
+This is module 7-base_geometry
+<BLANKLINE>
+This module contains:
+-one class
+-two functions
+<BLANKLINE>
+Access test for this class in /tests subfolder - to run:
+`python3 -m doctest ./tests/7-base_geometry.txt`
+<BLANKLINE>
+
+Check for class docstring
+-------------------------
+>>> print(__import__("7-base_geometry").BaseGeometry.__doc__) #doctest: +NORMALIZE_WHITESPACE
+<BLANKLINE>
+base geometry class
+<BLANKLINE>
+Public instance method:
+`def area(self)`
+`def integer_validator(self, name, value)`
+<BLANKLINE>
+Args:
+name
+value
+Returns:
+area of shape
+<BLANKLINE>
+
+Check for function docstrings
+-----------------------------
+Inside class
+area
+----
+>>> print(__import__("7-base_geometry").BaseGeometry.area.__doc__) #doctest: +NORMALIZE_WHITESPACE
+<BLANKLINE>
+public method to determine area
+Raises:
+Exception with the message
+<BLANKLINE>
+
+integer_validator
+-----------------
+>>> print(__import__("7-base_geometry").BaseGeometry.integer_validator.__doc__) #doctest: +NORMALIZE_WHITESPACE
+<BLANKLINE>
+validates value from int type
+<BLANKLINE>
+
+Expected Success
+================
+# Set up the base:
+>>> base = BaseGeometry()
+
+# name: string, value: positive integer
+>>> base.integer_validator("height", 5)
+
+ 
+Expected Failure:
+=================
+# name: string, value: 0
+>>> base.integer_validator("string", 0)
+Traceback (most recent call last):
+ValueError: string must be greater than 0
+
+# name: string, value: negative integer
+>>> base.integer_validator("hello", -7)
+Traceback (most recent call last):
+ValueError: hello must be greater than 0
+
+# name: string, value: False
+>>> base.integer_validator("yo", False)
+Traceback (most recent call last):
+TypeError: yo must be an integer
+
+# name: string, value: float
+>>> base.integer_validator("ew", 8.4)
+Traceback (most recent call last):
+TypeError: ew must be an integer
+
+# name: string, value: list
+>>> base.integer_validator("list", [2, 3, 5])
+Traceback (most recent call last):
+TypeError: list must be an integer
+
+
+# name: string, value: tuple
+>>> base.integer_validator("tuple", (6, "hi"))
+Traceback (most recent call last):
+TypeError: tuple must be an integer
+
+# name: string, value: set
+>>> base.integer_validator("set", {'apple', 'basket'})
+Traceback (most recent call last):
+TypeError: set must be an integer
+
+# name: string, value: dictionary
+>>> base.integer_validator("dict", {'key':'value'})
+Traceback (most recent call last):
+TypeError: dict must be an integer
+
+# name: string, value: string
+>>> base.integer_validator("string", "another string")
+Traceback (most recent call last):
+TypeError: string must be an integer
