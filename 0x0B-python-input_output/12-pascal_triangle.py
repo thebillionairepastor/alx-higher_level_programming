@@ -1,30 +1,13 @@
 #!/usr/bin/python3
-def pascal_triangle(n):
-    """ Function that returns the pascal triangle
+Student = __import__('12-student').Student
 
-    Args:
-        n: number of lines
+student_1 = Student("John", "Doe", 23)
+student_2 = Student("Bob", "Dylan", 27)
 
-    Returns:
-        matrix: a matrix with the pascal triangle
+j_student_1 = student_1.to_json()
+j_student_2 = student_2.to_json(['first_name', 'age'])
+j_student_3 = student_2.to_json(['middle_name', 'age'])
 
-    """
-
-    matrix = []
-    prev = []
-
-    for i in range(n):
-        res_list = []
-        p1 = -1
-        p2 = 0
-        for j in range(len(prev) + 1):
-            if p1 == -1 or p2 == len(prev):
-                res_list += [1]
-            else:
-                res_list += [prev[p1] + prev[p2]]
-            p1 += 1
-            p2 += 1
-        matrix.append(res_list)
-        prev = res_list[:]
-
-    return matrix
+print(j_student_1)
+print(j_student_2)
+print(j_student_3)
