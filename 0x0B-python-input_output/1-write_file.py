@@ -1,6 +1,19 @@
 #!/usr/bin/python3
-number_of_lines = __import__('1-number_of_lines').number_of_lines
+""" Module that contains a function that writes to a text file
+"""
 
-filename = "my_file_0.txt"
-nb_lines = number_of_lines(filename)
-print("{} has {:d} lines".format(filename, nb_lines))
+
+def write_file(filename="", text=""):
+    """ Function that writes to a text file
+
+    Args:
+        filename: filename
+        text: text to write
+
+    Raises
+        Exception: when the file can be opened
+
+    """
+
+    with open(filename, 'w', encoding="utf-8") as f:
+        return f.write(text)
