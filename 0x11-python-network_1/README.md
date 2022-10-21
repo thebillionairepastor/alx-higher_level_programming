@@ -31,4 +31,4 @@ Write a Python script that takes in a letter and sends a POST request to http://
 Write a Python script that takes in a string and sends a search request to the Star Wars API
 10. My Github!
 Write a Python script that takes your Github credentials (username and password) and uses the Github API to display your id
-Author
+Author  David Michael
